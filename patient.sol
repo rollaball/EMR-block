@@ -17,7 +17,9 @@ contract patient is emr_con{
         delete emrs[eid].idToPerm[docid];
     }
     
-    
+    function give_ota(uint eid, uint docid) public check_if_owner(eid){
+        emrs[eid].idToPerm[docid]=2;
+    }
     
     
     
