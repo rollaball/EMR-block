@@ -23,7 +23,7 @@ contract patient is emr_con{
     //////////////////////
     string a;
     uint ii;
-    function create_emr_doc(string _problem,string _medication,string _tests,string _result,uint patid) public returns(uint,uint){
+    function create_emr_doc(string _problem,string _medication,string _tests,string _result,uint patid) public returns(uint,uint,uint){
         eid_c++;
   /*      uint[] storage x;
         x.push(docid);
@@ -36,11 +36,11 @@ contract patient is emr_con{
         test.result=_result;
         test.eid=eid_c-1;
         test.patient_id=patid;
-        test.idToPerm[ii]=1;
         
         emrs.push(test);
+        emrs[eid_c-1].idToPerm[ii]=1;
         patToEmrArr[patid].push(eid_c);
-        return (eid_c-1,ii);
+        return (eid_c-1,ii, emrs[eid_c-1].idToPerm[ii]);
     }
     
     function get_emr_doc(uint eid) public view check_if_doc_perm(eid) returns(uint,string,string,string,string) {
@@ -55,9 +55,9 @@ contract patient is emr_con{
         return a;
     }
     //////////////////////////
-    function temp(uint ee) returns(uint){
+   /* function temp(uint ee) public view returns(uint){
         return emrs[ee].idToPerm[2];
-    }
+    }*/
     
     
 }
