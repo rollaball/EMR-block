@@ -10,10 +10,10 @@ contract patient is emr_con{
         return(emrs[eid].date,emrs[eid].problem,emrs[eid].medication,emrs[eid].tests,emrs[eid].result);
     }
     
-    function give_perm(uint patid,uint eid,uint docid) public owned(patid) check_if_owner(eid){
+    function give_perm(uint eid,uint docid) public check_if_owner(eid){
         emrs[eid].idToPerm[docid]=1;
     }
-    function deny_perm(uint patid,uint eid,uint docid) public owned(patid) check_if_owner(eid){
+    function deny_perm(uint eid,uint docid) public check_if_owner(eid){
         delete emrs[eid].idToPerm[docid];
     }
     
@@ -43,7 +43,7 @@ contract patient is emr_con{
         return (eid_c-1,ii, emrs[eid_c-1].idToPerm[ii]);
     }
     
-    function get_emr_doc(uint eid) public view check_if_doc_perm(eid) returns(uint,string,string,string,string) {
+    function get_emr_doc(uint eid) public check_if_doc_perm(eid) returns(uint,string,string,string,string) {
         return(emrs[eid].date,emrs[eid].problem,emrs[eid].medication,emrs[eid].tests,emrs[eid].result);
     }
     

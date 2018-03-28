@@ -37,9 +37,9 @@ contract emr_con is client{
     
     modifier check_if_doc_perm(uint eid){
         require(emrs[eid].idToPerm[addressToId[msg.sender]]!=0);
-   /*     if(emrs[eid].idToPerm[addressToId[msg.sender]]==2)
+        if(emrs[eid].idToPerm[addressToId[msg.sender]]==2)
             emrs[eid].idToPerm[addressToId[msg.sender]]=0;
-   */         
+            
         _;
     }
     
