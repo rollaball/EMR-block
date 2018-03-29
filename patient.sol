@@ -47,15 +47,14 @@ contract patient is emr_con{
         return(emrs[eid].date,emrs[eid].problem,emrs[eid].medication,emrs[eid].tests,emrs[eid].result);
     }
     
-    function get_history_doc(uint pid) public returns(string,uint,uint){
-        a="1";
-        uint count=0;
+    function get_history_doc(uint pid) public returns(string,uint){
+   //     string a;
+        a="";
         for(uint i=0;i<patToEmrArr[pid].length;i++){
-            strConcat(a,emrs[patToEmrArr[pid][i]].problem);
-            count++;
+            a=strConcat(a,emrs[patToEmrArr[pid][i]].problem,"\n");
         }
     
-        return (a,patToEmrArr[pid].length,count);
+        return (a,patToEmrArr[pid].length);
     }
     //////////////////////////
    /* function temp(uint ee) public view returns(uint){
