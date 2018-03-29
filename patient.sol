@@ -39,20 +39,23 @@ contract patient is emr_con{
         
         emrs.push(test);
         emrs[eid_c-1].idToPerm[ii]=1;
-        patToEmrArr[patid].push(eid_c);
+        patToEmrArr[patid].push(eid_c-1);
         return (eid_c-1,ii, emrs[eid_c-1].idToPerm[ii]);
     }
     
-    function get_emr_doc(uint eid) public check_if_doc_perm(eid) returns(uint,string,string,string,string) {
+    function get_emr_doc(uint eid) public view check_if_doc_perm(eid) returns(uint,string,string,string,string) {
         return(emrs[eid].date,emrs[eid].problem,emrs[eid].medication,emrs[eid].tests,emrs[eid].result);
     }
     
-    function get_history_doc(uint pid) public returns(string){
-        a="";
+    function get_history_doc(uint pid) public returns(string,uint,uint){
+        a="1";
+        uint count=0;
         for(uint i=0;i<patToEmrArr[pid].length;i++){
-            strConcat(a,emrs[i].problem,"\n");
+            strConcat(a,emrs[patToEmrArr[pid][i]].problem);
+            count++;
         }
-        return a;
+    
+        return (a,patToEmrArr[pid].length,count);
     }
     //////////////////////////
    /* function temp(uint ee) public view returns(uint){
